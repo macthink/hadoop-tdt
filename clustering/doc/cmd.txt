@@ -4,6 +4,7 @@
 Maven打包命令：
 mvn package -DskipTests=true
 mvn install -DskipTests=true
+put D:/Develop/github/hadoop-tdt/clustering/target/clustering-0.0.1.jar
 
 其他常用命令：
 bin/hadoop fs -lsr /
