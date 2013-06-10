@@ -1,0 +1,16 @@
+bin/hadoop jar ~/batchpass-0.0.1.jar cn.macthink.hadoop.tdt.batchpass.PreHadoopLDA
+
+bin/hadoop jar ~/original-lda-0.0.1.jar train \
+--input=/hadoop-lda-input \
+--output=/hadoop-lda-output \
+--working_dir=/hadoop-lda-working \
+--num_topics=15 \
+--num_iterations=3 \
+--iterations_to_keep=2 \
+--max_num_words=-1 \
+--input_format=text \
+--min_df=2 \
+--alpha=5 \
+--beta=0.01
+
+java -jar lda-0.0.1.jar showModel -model /root/hadoop-lda-output

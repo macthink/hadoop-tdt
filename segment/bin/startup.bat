@@ -1,0 +1,1 @@
+segment-0.0.1.exe -i D:\input -o D:\output -oi D:\oldInput -c gbk
