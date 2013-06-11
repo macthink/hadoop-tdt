@@ -71,12 +71,15 @@ public class GenerateInitClustersDriver extends Configured implements Tool {
 		// 配置Job
 		Job job = new Job(conf, GenerateInitClustersDriver.class.getSimpleName());
 		job.setJarByClass(GenerateInitClustersDriver.class);
-		job.setInputFormatClass(KeyValueTextInputFormat.class);
-		job.setMapperClass(GenerateInitClustersMapper.class);
 		job.setNumReduceTasks(0);
+
+		job.setInputFormatClass(KeyValueTextInputFormat.class);
+		job.setOutputFormatClass(SequenceFileOutputFormat.class);
+
+		job.setMapperClass(GenerateInitClustersMapper.class);
+
 		job.setOutputKeyClass(NullWritable.class);
 		job.setOutputValueClass(ClusterWritable.class);
-		job.setOutputFormatClass(SequenceFileOutputFormat.class);
 
 		FileInputFormat.addInputPath(job, inputPath);
 		FileOutputFormat.setOutputPath(job, outputPath);
