@@ -86,7 +86,7 @@ public class DocumentTFIDFDriver extends Configured implements Tool {
 		conf.setInt("numOfDocs", numOfDocs);
 
 		// 打印输入信息
-		LOG.info("wordListPath is " + wordListPath);
+		LOG.info("termListPath is " + wordListPath);
 		LOG.info("inputPath is " + inputPath);
 		LOG.info("outputPath is " + outputPath);
 		LOG.info("numOfDocs is " + numOfDocs);

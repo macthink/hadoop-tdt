@@ -34,6 +34,13 @@ public class PartitionSortKeyPair implements WritableComparable<PartitionSortKey
 
 	/**
 	 * 构造函数
+	 */
+	public PartitionSortKeyPair() {
+		super();
+	}
+
+	/**
+	 * 构造函数
 	 * 
 	 * @param sortKey
 	 * @param partitionKey

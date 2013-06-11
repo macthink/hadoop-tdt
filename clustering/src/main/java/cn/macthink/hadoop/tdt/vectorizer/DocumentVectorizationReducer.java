@@ -88,7 +88,7 @@ public class DocumentVectorizationReducer extends Reducer<Text, Text, Text, Text
 
 		StringBuffer stringBuffer = new StringBuffer();
 		for (String term : termList) {
-			double termValue = 0.0d;
+			double termValue = 0d;
 			if (existTermMap.containsKey(term)) {
 				termValue = existTermMap.get(term);
 			}
