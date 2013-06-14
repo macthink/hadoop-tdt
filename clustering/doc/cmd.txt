@@ -23,18 +23,21 @@ hadoop fs -get /term-list-output ~/
 
 执行第二步：
 hadoop jar ~/clustering-0.0.1.jar cn.macthink.hadoop.tdt.vectorizer.tfidf.DocumentTFIDFDriver
-hadoop jar ~/clustering-0.0.1.jar cn.macthink.hadoop.tdt.vectorizer.old.tfidf.DocumentTFIDFDriver
+*hadoop jar ~/clustering-0.0.1.jar cn.macthink.hadoop.tdt.vectorizer.old.tfidf.DocumentTFIDFDriver
 rm -rf ~/document-tfidf-output
 hadoop fs -get /document-tfidf-output ~/
 
 执行第三步：
 hadoop jar ~/clustering-0.0.1.jar cn.macthink.hadoop.tdt.vectorizer.DocumentVectorizationDriver
-hadoop jar ~/clustering-0.0.1.jar cn.macthink.hadoop.tdt.vectorizer.old.DocumentVectorizationDriver
+*hadoop jar ~/clustering-0.0.1.jar cn.macthink.hadoop.tdt.vectorizer.old.DocumentVectorizationDriver
 rm -rf ~/document-vectorizer-output
 hadoop fs -get /document-vectorizer-output ~/
 
 执行第四步：
-hadoop jar ~/clustering-0.0.1.jar cn.macthink.hadoop.tdt.clustering.preprocessing.TextFileToSequenceFileDriver
+hadoop jar ~/clustering-0.0.1.jar cn.macthink.hadoop.tdt.clustering.preprocessing.GenerateInitClustersDriver
+
+执行第五步：
+hadoop jar ~/clustering-0.0.1.jar cn.macthink.hadoop.tdt.clustering.agenes.PartitionGenerateClustersDistanceDriver
 
 执行第三步：
 bin/hadoop fs -rmr /clustering-output
