@@ -14,9 +14,10 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
-import org.apache.hadoop.mapreduce.lib.input.SequenceFileAsBinaryInputFormat;
+import org.apache.hadoop.mapreduce.lib.input.SequenceFileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.SequenceFileOutputFormat;
 import org.apache.hadoop.util.Tool;
@@ -24,6 +25,7 @@ import org.apache.hadoop.util.ToolRunner;
 
 import cn.macthink.hadoop.tdt.clustering.util.partitionsort.PartitionSortKeyPair;
 import cn.macthink.hadoop.tdt.entity.writable.ClusterDistanceWritable;
+import cn.macthink.hadoop.tdt.entity.writable.ClusterWritable;
 import cn.macthink.hadoop.tdt.util.Constants;
 import cn.macthink.hadoop.tdt.util.HadoopUtils;
 
@@ -56,7 +58,7 @@ public class PartitionGenerateClustersDistanceDriver extends Configured implemen
 		conf.set(Constants.MAPRED_JOB_TRACKER_KEY, Constants.MAPRED_JOB_TRACKER);
 		conf.set(Constants.FS_DEFAULT_NAME_KEY, Constants.FS_DEFAULT_NAME);
 		conf.setInt(Constants.CLUSTERING_AGENES_PROCESSOR_NUM_KEY, Constants.CLUSTERING_AGENES_PROCESSOR_NUM);
-		//conf.set(Constants.CLUSTER_DISTANCE_MEASURE_KEY, value)
+		// conf.set(Constants.CLUSTER_DISTANCE_MEASURE_KEY, value)
 
 		// 获得文件系统及输入、输出路径
 		String fsDefaultName = conf.get(Constants.FS_DEFAULT_NAME_KEY);
@@ -75,11 +77,14 @@ public class PartitionGenerateClustersDistanceDriver extends Configured implemen
 		job.setJarByClass(PartitionGenerateClustersDistanceDriver.class);
 		job.setNumReduceTasks(Constants.CLUSTERING_AGENES_PROCESSOR_NUM);
 
-		job.setInputFormatClass(SequenceFileAsBinaryInputFormat.class);
+		job.setInputFormatClass(SequenceFileInputFormat.class);
 		job.setOutputFormatClass(SequenceFileOutputFormat.class);
 
+		job.setMapOutputKeyClass(IntWritable.class);
+		job.setMapOutputValueClass(ClusterWritable.class);
+
 		job.setMapperClass(PartitionGenerateClustersDistanceMapper.class);
-		job.setPartitionerClass(PartitionGenerateClustersDistancePartitioner.class);
+		job.setPartitionerClass(KeyPartitioner.class);
 		job.setReducerClass(PartitionGenerateClustersDistanceReducer.class);
 
 		job.setOutputKeyClass(PartitionSortKeyPair.class);

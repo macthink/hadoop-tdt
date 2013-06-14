@@ -15,13 +15,13 @@ import java.util.List;
 import org.apache.hadoop.io.DoubleWritable;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.mapreduce.Reducer;
-import org.apache.mahout.common.ClassUtils;
 
 import cn.macthink.hadoop.tdt.clustering.util.partitionsort.PartitionSortKeyPair;
 import cn.macthink.hadoop.tdt.distance.cluster.ClusterDistanceMeasure;
 import cn.macthink.hadoop.tdt.entity.ClusterDistance;
 import cn.macthink.hadoop.tdt.entity.writable.ClusterDistanceWritable;
 import cn.macthink.hadoop.tdt.entity.writable.ClusterWritable;
+import cn.macthink.hadoop.tdt.util.ClassUtils;
 import cn.macthink.hadoop.tdt.util.Constants;
 
 import com.google.common.base.Preconditions;

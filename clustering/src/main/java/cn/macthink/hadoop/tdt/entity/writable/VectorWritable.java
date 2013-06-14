@@ -30,6 +30,13 @@ public class VectorWritable implements Writable {
 
 	/**
 	 * 构造函数
+	 */
+	public VectorWritable() {
+		super();
+	}
+
+	/**
+	 * 构造函数
 	 * 
 	 * @param vector
 	 */

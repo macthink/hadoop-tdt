@@ -30,6 +30,13 @@ public class ClusterDistanceWritable implements WritableComparable<ClusterDistan
 
 	/**
 	 * 构造函数
+	 */
+	public ClusterDistanceWritable() {
+		super();
+	}
+
+	/**
+	 * 构造函数
 	 * 
 	 * @param clusterDistance
 	 */

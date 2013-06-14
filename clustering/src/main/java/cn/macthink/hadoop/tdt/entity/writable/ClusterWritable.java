@@ -22,6 +22,13 @@ public class ClusterWritable implements Writable {
 
 	/**
 	 * 构造函数
+	 */
+	public ClusterWritable() {
+		super();
+	}
+
+	/**
+	 * 构造函数
 	 * 
 	 * @param cluster
 	 */

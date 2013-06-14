@@ -6,7 +6,7 @@
  * Copyright 2013 Macthink.cn.
  * All rights reserved.
  */
-package cn.macthink.hadoop.tdt.clustering.preprocessing;
+package cn.macthink.hadoop.tdt.clustering.agenes.preprocessing;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;

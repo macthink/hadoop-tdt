@@ -25,7 +25,7 @@ import cn.macthink.hadoop.tdt.util.Constants;
 public class PartitionGenerateClustersDistanceMapper extends
 		Mapper<NullWritable, ClusterWritable, IntWritable, ClusterWritable> {
 
-	// 层次凝聚时将使用的处理机数目（处理机即Mapper or Reducer）
+	// 将使用的处理机数目（处理机即Mapper or Reducer）
 	private int processorNum;
 
 	@Override

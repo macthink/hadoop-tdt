@@ -17,7 +17,7 @@ import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.WritableComparable;
 
 /**
- * PartitionSortKeyPairWritable
+ * PartitionSortKeyPair
  * 
  * @author Macthink
  */

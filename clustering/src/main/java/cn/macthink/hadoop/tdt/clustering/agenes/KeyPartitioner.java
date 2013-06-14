@@ -9,19 +9,18 @@
 package cn.macthink.hadoop.tdt.clustering.agenes;
 
 import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.Writable;
 import org.apache.hadoop.mapreduce.Partitioner;
 
-import cn.macthink.hadoop.tdt.entity.writable.ClusterWritable;
-
 /**
- * PartitionGenerateClustersDistancePartitioner
+ * KeyPartitioner
  * 
  * @author Macthink
  */
-public class PartitionGenerateClustersDistancePartitioner extends Partitioner<IntWritable, ClusterWritable> {
+public class KeyPartitioner extends Partitioner<IntWritable, Writable> {
 
 	@Override
-	public int getPartition(IntWritable key, ClusterWritable value, int numPartitions) {
+	public int getPartition(IntWritable key, Writable value, int numPartitions) {
 		return key.get() % numPartitions;
 	}
 
