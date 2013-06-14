@@ -17,7 +17,14 @@ import com.google.common.base.Preconditions;
  * 
  * @author Macthink
  */
-public class VectorCosineDistanceMeasure implements VectorDistanceMeasure {
+public class VectorCosineDistanceMeasure extends VectorAbstractDistanceMeasure {
+
+	/**
+	 * 构造函数
+	 */
+	public VectorCosineDistanceMeasure() {
+		super();
+	}
 
 	@Override
 	public double distance(Vector samplePoint1, Vector samplePoint2) {

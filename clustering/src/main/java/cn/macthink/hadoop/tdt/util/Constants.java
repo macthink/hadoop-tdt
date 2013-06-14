@@ -75,7 +75,9 @@ public class Constants {
 	public static final String CLUSTER_DISTANCE_MEASURE_KEY = "cn.macthink.hadoop.tdt.distance.cluster.ClusterDistanceMeasure";
 	public static final String VECTOR_DISTANCE_MEASURE_KEY = "cn.macthink.hadoop.tdt.distance.vector.VectorDistanceMeasure";
 
-	public static int CLUSTERING_AGENES_PROCESSOR_NUM = configuration.getInt(CLUSTERING_AGENES_PROCESSOR_NUM_KEY, 1);
+	public static int CLUSTERING_AGENES_PROCESSOR_NUM = configuration.getInt(CLUSTERING_AGENES_PROCESSOR_NUM_KEY);
+	public static String CLUSTER_DISTANCE_MEASURE = configuration.getString(CLUSTER_DISTANCE_MEASURE_KEY);
+	public static String VECTOR_DISTANCE_MEASURE = configuration.getString(VECTOR_DISTANCE_MEASURE_KEY);
 	public static String PARTITION_GENERATE_CLUSTERS_DISTANCE_INPUT_PATH = configuration
 			.getString("partition.generate.clusters.distance.input.path");
 	public static String PARTITION_GENERATE_CLUSTERS_DISTANCE_OUTPUT_PATH = configuration

@@ -39,4 +39,19 @@ public abstract class ClusterAbstractDistanceMeasure implements ClusterDistanceM
 		this.vectorDistanceMeasure = vectorDistanceMeasure;
 	}
 
+	/**
+	 * @return the vectorDistanceMeasure
+	 */
+	public VectorDistanceMeasure getVectorDistanceMeasure() {
+		return vectorDistanceMeasure;
+	}
+
+	/**
+	 * @param vectorDistanceMeasure
+	 *            the vectorDistanceMeasure to set
+	 */
+	public void setVectorDistanceMeasure(VectorDistanceMeasure vectorDistanceMeasure) {
+		this.vectorDistanceMeasure = vectorDistanceMeasure;
+	}
+
 }

@@ -12,12 +12,14 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.io.DoubleWritable;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.mapreduce.Reducer;
 
 import cn.macthink.hadoop.tdt.clustering.util.partitionsort.PartitionSortKeyPair;
-import cn.macthink.hadoop.tdt.distance.cluster.ClusterDistanceMeasure;
+import cn.macthink.hadoop.tdt.distance.cluster.ClusterAbstractDistanceMeasure;
+import cn.macthink.hadoop.tdt.distance.vector.VectorAbstractDistanceMeasure;
 import cn.macthink.hadoop.tdt.entity.ClusterDistance;
 import cn.macthink.hadoop.tdt.entity.writable.ClusterDistanceWritable;
 import cn.macthink.hadoop.tdt.entity.writable.ClusterWritable;
@@ -35,12 +37,18 @@ import com.google.common.collect.Lists;
 public class PartitionGenerateClustersDistanceReducer extends
 		Reducer<IntWritable, ClusterWritable, PartitionSortKeyPair, ClusterDistanceWritable> {
 
-	private ClusterDistanceMeasure clusterDistanceMeasure;
+	private VectorAbstractDistanceMeasure vectorDistanceMeasure;
+	private ClusterAbstractDistanceMeasure clusterDistanceMeasure;
 
 	@Override
 	protected void setup(Context context) throws IOException, InterruptedException {
-		clusterDistanceMeasure = ClassUtils.instantiateAs(
-				context.getConfiguration().get(Constants.CLUSTER_DISTANCE_MEASURE_KEY), ClusterDistanceMeasure.class);
+		// 生成距离度量策略
+		Configuration conf = context.getConfiguration();
+		vectorDistanceMeasure = ClassUtils.instantiateAs(conf.get(Constants.VECTOR_DISTANCE_MEASURE_KEY),
+				VectorAbstractDistanceMeasure.class);
+		clusterDistanceMeasure = ClassUtils.instantiateAs(conf.get(Constants.CLUSTER_DISTANCE_MEASURE_KEY),
+				ClusterAbstractDistanceMeasure.class);
+		clusterDistanceMeasure.setVectorDistanceMeasure(vectorDistanceMeasure);
 	}
 
 	/**

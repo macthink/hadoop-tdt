@@ -19,6 +19,18 @@ import cn.macthink.hadoop.tdt.entity.Vector;
  */
 public class ClusterMeanDistanceMeasure extends ClusterAbstractDistanceMeasure {
 
+	/**
+	 * 构造函数
+	 */
+	public ClusterMeanDistanceMeasure() {
+		super();
+	}
+
+	/**
+	 * 构造函数
+	 * 
+	 * @param samplePointDistanceMeasure
+	 */
 	public ClusterMeanDistanceMeasure(VectorDistanceMeasure samplePointDistanceMeasure) {
 		super(samplePointDistanceMeasure);
 	}

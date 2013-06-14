@@ -57,8 +57,12 @@ public class PartitionGenerateClustersDistanceDriver extends Configured implemen
 		Configuration conf = getConf();
 		conf.set(Constants.MAPRED_JOB_TRACKER_KEY, Constants.MAPRED_JOB_TRACKER);
 		conf.set(Constants.FS_DEFAULT_NAME_KEY, Constants.FS_DEFAULT_NAME);
+		// 设置处理机数目
 		conf.setInt(Constants.CLUSTERING_AGENES_PROCESSOR_NUM_KEY, Constants.CLUSTERING_AGENES_PROCESSOR_NUM);
-		// conf.set(Constants.CLUSTER_DISTANCE_MEASURE_KEY, value)
+		// 设置类别间的距离度量策略
+		conf.set(Constants.CLUSTER_DISTANCE_MEASURE_KEY, Constants.CLUSTER_DISTANCE_MEASURE);
+		// 设置向量间的距离度量策略
+		conf.set(Constants.VECTOR_DISTANCE_MEASURE_KEY, Constants.VECTOR_DISTANCE_MEASURE);
 
 		// 获得文件系统及输入、输出路径
 		String fsDefaultName = conf.get(Constants.FS_DEFAULT_NAME_KEY);

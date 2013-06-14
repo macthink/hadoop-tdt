@@ -8,11 +8,26 @@
  */
 package cn.macthink.hadoop.tdt.distance.vector;
 
+import cn.macthink.hadoop.tdt.entity.Vector;
+
 /**
  * EuclideanDistanceMeasure
  * 
  * @author Macthink
  */
-public class VectorEuclideanDistanceMeasure {
+public class VectorEuclideanDistanceMeasure extends VectorAbstractDistanceMeasure {
+
+	/**
+	 * 构造函数
+	 */
+	public VectorEuclideanDistanceMeasure() {
+		super();
+	}
+
+	@Override
+	public double distance(Vector samplePoint1, Vector samplePoint2) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 }
