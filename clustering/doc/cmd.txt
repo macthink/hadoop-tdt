@@ -38,6 +38,8 @@ hadoop jar ~/clustering-0.0.1.jar cn.macthink.hadoop.tdt.clustering.preprocessin
 
 执行第五步：
 hadoop jar ~/clustering-0.0.1.jar cn.macthink.hadoop.tdt.clustering.agenes.PartitionGenerateClustersDistanceDriver
+cp ~/clustering-0.0.1.jar /usr/local/hadoop/lib
+hadoop cn.macthink.hadoop.tdt.clustering.agenes.PartitionGenerateClustersDistanceOutputReader hdfs://192.168.1.10:9000/clustering/output/clusters-distance/part-r-00000
 
 执行第三步：
 bin/hadoop fs -rmr /clustering-output

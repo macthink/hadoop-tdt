@@ -6,7 +6,7 @@
  * Copyright 2013 Macthink.cn.
  * All rights reserved.
  */
-package cn.macthink.hadoop.tdt.clustering;
+package cn.macthink.hadoop.tdt.util;
 
 import java.io.IOException;
 import java.util.ArrayList;

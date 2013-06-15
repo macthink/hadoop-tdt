@@ -6,7 +6,7 @@
  * Copyright 2013 Macthink.cn.
  * All rights reserved.
  */
-package cn.macthink.hadoop.tdt.clustering.agenes;
+package cn.macthink.hadoop.tdt.util.partitioner;
 
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Writable;

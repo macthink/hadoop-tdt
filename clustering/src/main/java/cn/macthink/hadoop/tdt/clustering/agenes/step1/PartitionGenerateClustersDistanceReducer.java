@@ -6,7 +6,7 @@
  * Copyright 2013 Macthink.cn.
  * All rights reserved.
  */
-package cn.macthink.hadoop.tdt.clustering.agenes;
+package cn.macthink.hadoop.tdt.clustering.agenes.step1;
 
 import java.io.IOException;
 import java.util.Iterator;
@@ -17,7 +17,7 @@ import org.apache.hadoop.io.DoubleWritable;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.mapreduce.Reducer;
 
-import cn.macthink.hadoop.tdt.clustering.util.partitionsort.PartitionSortKeyPair;
+import cn.macthink.hadoop.tdt.clustering.agenes.step1.partitionsort.PartitionSortKeyPair;
 import cn.macthink.hadoop.tdt.distance.cluster.ClusterAbstractDistanceMeasure;
 import cn.macthink.hadoop.tdt.distance.vector.VectorAbstractDistanceMeasure;
 import cn.macthink.hadoop.tdt.entity.ClusterDistance;

@@ -6,7 +6,7 @@
  * Copyright 2013 Macthink.cn.
  * All rights reserved.
  */
-package cn.macthink.hadoop.tdt.clustering.agenes;
+package cn.macthink.hadoop.tdt.clustering.agenes.step1;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
@@ -23,11 +23,12 @@ import org.apache.hadoop.mapreduce.lib.output.SequenceFileOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
-import cn.macthink.hadoop.tdt.clustering.util.partitionsort.PartitionSortKeyPair;
+import cn.macthink.hadoop.tdt.clustering.agenes.step1.partitionsort.PartitionSortKeyPair;
 import cn.macthink.hadoop.tdt.entity.writable.ClusterDistanceWritable;
 import cn.macthink.hadoop.tdt.entity.writable.ClusterWritable;
 import cn.macthink.hadoop.tdt.util.Constants;
 import cn.macthink.hadoop.tdt.util.HadoopUtils;
+import cn.macthink.hadoop.tdt.util.partitioner.KeyPartitioner;
 
 /**
  * PartitionGenerateClustersDistanceDriver

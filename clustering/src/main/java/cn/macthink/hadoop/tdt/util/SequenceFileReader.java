@@ -6,7 +6,7 @@
  * Copyright 2013 Macthink.cn.
  * All rights reserved.
  */
-package cn.macthink.hadoop.tdt.clustering.agenes;
+package cn.macthink.hadoop.tdt.util;
 
 import java.io.IOException;
 import java.net.URI;
@@ -19,14 +19,13 @@ import org.apache.hadoop.io.SequenceFile;
 import org.apache.hadoop.io.Writable;
 import org.apache.hadoop.util.ReflectionUtils;
 
-import cn.macthink.hadoop.tdt.util.Constants;
 
 /**
- * PartitionGenerateClustersDistanceOutputReader
+ * SequenceFileOutputReader
  * 
  * @author Macthink
  */
-public class PartitionGenerateClustersDistanceOutputReader {
+public class SequenceFileReader {
 
 	/**
 	 * @param args
@@ -34,7 +33,9 @@ public class PartitionGenerateClustersDistanceOutputReader {
 	 */
 	public static void main(String[] args) throws IOException {
 		Configuration conf = new Configuration();
-		URI uri = URI.create(Constants.PARTITION_GENERATE_CLUSTERS_DISTANCE_OUTPUT_PATH);
+		conf.set(Constants.MAPRED_JOB_TRACKER_KEY, Constants.MAPRED_JOB_TRACKER);
+		conf.set(Constants.FS_DEFAULT_NAME_KEY, Constants.FS_DEFAULT_NAME);
+		URI uri = URI.create(args[0]);
 		FileSystem fs = FileSystem.get(uri, conf);
 		Path path = new Path(uri);
 		SequenceFile.Reader reader = null;
@@ -49,6 +50,8 @@ public class PartitionGenerateClustersDistanceOutputReader {
 				position = reader.getPosition();
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
 			IOUtils.closeStream(reader);
 		}
 	}

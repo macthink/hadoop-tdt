@@ -11,8 +11,8 @@ package cn.macthink.hadoop.tdt.clustering;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.util.ToolRunner;
 
-import cn.macthink.hadoop.tdt.clustering.agenes.PartitionGenerateClustersDistanceDriver;
 import cn.macthink.hadoop.tdt.clustering.agenes.preprocessing.GenerateInitClustersDriver;
+import cn.macthink.hadoop.tdt.clustering.agenes.step1.PartitionGenerateClustersDistanceDriver;
 import cn.macthink.hadoop.tdt.vectorizer.DocumentVectorizationDriver;
 import cn.macthink.hadoop.tdt.vectorizer.termlist.GenerateTermListDriver;
 import cn.macthink.hadoop.tdt.vectorizer.tfidf.DocumentTFIDFDriver;
