@@ -23,12 +23,12 @@ import org.apache.hadoop.mapreduce.lib.output.SequenceFileOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
-import cn.macthink.hadoop.tdt.clustering.agenes.step1.partitionsort.PartitionSortKeyPair;
 import cn.macthink.hadoop.tdt.entity.writable.ClusterDistanceWritable;
 import cn.macthink.hadoop.tdt.entity.writable.ClusterWritable;
 import cn.macthink.hadoop.tdt.util.HadoopUtils;
 import cn.macthink.hadoop.tdt.util.constant.Constants;
 import cn.macthink.hadoop.tdt.util.partitioner.KeyPartitioner;
+import cn.macthink.hadoop.tdt.util.partitionsort.PartitionSortKeyPair;
 
 /**
  * PartitionGenerateClustersDistanceDriver

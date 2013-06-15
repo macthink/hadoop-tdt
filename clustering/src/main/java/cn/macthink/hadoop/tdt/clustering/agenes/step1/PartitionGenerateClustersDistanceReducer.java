@@ -17,7 +17,6 @@ import org.apache.hadoop.io.DoubleWritable;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.mapreduce.Reducer;
 
-import cn.macthink.hadoop.tdt.clustering.agenes.step1.partitionsort.PartitionSortKeyPair;
 import cn.macthink.hadoop.tdt.distance.cluster.ClusterAbstractDistanceMeasure;
 import cn.macthink.hadoop.tdt.distance.vector.VectorAbstractDistanceMeasure;
 import cn.macthink.hadoop.tdt.entity.ClusterDistance;
@@ -25,6 +24,7 @@ import cn.macthink.hadoop.tdt.entity.writable.ClusterDistanceWritable;
 import cn.macthink.hadoop.tdt.entity.writable.ClusterWritable;
 import cn.macthink.hadoop.tdt.util.ClassUtils;
 import cn.macthink.hadoop.tdt.util.constant.Constants;
+import cn.macthink.hadoop.tdt.util.partitionsort.PartitionSortKeyPair;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;

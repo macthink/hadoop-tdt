@@ -6,7 +6,7 @@
  * Copyright 2013 Macthink.cn.
  * All rights reserved.
  */
-package cn.macthink.hadoop.tdt.clustering.agenes.step1.partitionsort;
+package cn.macthink.hadoop.tdt.util.partitionsort;
 
 import org.apache.hadoop.io.Writable;
 import org.apache.hadoop.mapreduce.Partitioner;
