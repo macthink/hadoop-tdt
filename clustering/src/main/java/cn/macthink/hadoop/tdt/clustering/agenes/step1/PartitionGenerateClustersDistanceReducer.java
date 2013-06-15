@@ -24,7 +24,7 @@ import cn.macthink.hadoop.tdt.entity.ClusterDistance;
 import cn.macthink.hadoop.tdt.entity.writable.ClusterDistanceWritable;
 import cn.macthink.hadoop.tdt.entity.writable.ClusterWritable;
 import cn.macthink.hadoop.tdt.util.ClassUtils;
-import cn.macthink.hadoop.tdt.util.Constants;
+import cn.macthink.hadoop.tdt.util.constant.Constants;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;

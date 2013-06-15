@@ -23,7 +23,7 @@ import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
-import cn.macthink.hadoop.tdt.util.Constants;
+import cn.macthink.hadoop.tdt.util.constant.Constants;
 
 /**
  * DocumentTFIDFMapper

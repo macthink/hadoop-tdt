@@ -19,6 +19,8 @@ import org.apache.hadoop.io.SequenceFile;
 import org.apache.hadoop.io.Writable;
 import org.apache.hadoop.util.ReflectionUtils;
 
+import cn.macthink.hadoop.tdt.util.constant.Constants;
+
 
 /**
  * SequenceFileOutputReader

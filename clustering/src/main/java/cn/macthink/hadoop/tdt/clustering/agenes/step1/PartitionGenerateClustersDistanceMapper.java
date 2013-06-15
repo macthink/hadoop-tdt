@@ -15,7 +15,7 @@ import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.mapreduce.Mapper;
 
 import cn.macthink.hadoop.tdt.entity.writable.ClusterWritable;
-import cn.macthink.hadoop.tdt.util.Constants;
+import cn.macthink.hadoop.tdt.util.constant.Constants;
 
 /**
  * PartitionGenerateClustersDistanceMapper

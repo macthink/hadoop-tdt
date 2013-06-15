@@ -6,7 +6,7 @@
  * Copyright 2013 Macthink.cn.
  * All rights reserved.
  */
-package cn.macthink.hadoop.tdt.util;
+package cn.macthink.hadoop.tdt.util.constant;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.PropertiesConfiguration;

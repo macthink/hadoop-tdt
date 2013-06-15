@@ -23,8 +23,8 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
-import cn.macthink.hadoop.tdt.util.Constants;
 import cn.macthink.hadoop.tdt.util.HadoopUtils;
+import cn.macthink.hadoop.tdt.util.constant.Constants;
 
 /**
  * 生成词汇表
