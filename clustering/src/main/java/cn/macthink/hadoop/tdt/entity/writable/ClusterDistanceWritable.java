@@ -69,6 +69,7 @@ public class ClusterDistanceWritable implements WritableComparable<ClusterDistan
 
 	@Override
 	public void readFields(DataInput in) throws IOException {
+		clusterDistance = new ClusterDistance();
 		clusterDistance.setDistance(in.readDouble());
 		clusterDistance.setSource(ClusterWritable.readCluster(in));
 		clusterDistance.setTarget(ClusterWritable.readCluster(in));

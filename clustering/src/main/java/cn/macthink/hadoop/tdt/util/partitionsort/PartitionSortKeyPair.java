@@ -12,6 +12,8 @@ import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.apache.hadoop.io.DoubleWritable;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.WritableComparable;
@@ -89,13 +91,20 @@ public class PartitionSortKeyPair implements WritableComparable<PartitionSortKey
 
 	@Override
 	public void readFields(DataInput in) throws IOException {
+		sortKey = new DoubleWritable();
 		sortKey.readFields(in);
+		partitionKey = new IntWritable();
 		partitionKey.readFields(in);
 	}
 
 	@Override
 	public int compareTo(PartitionSortKeyPair o) {
 		return sortKey.compareTo(o.sortKey);
+	}
+
+	@Override
+	public String toString() {
+		return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
 	}
 
 }

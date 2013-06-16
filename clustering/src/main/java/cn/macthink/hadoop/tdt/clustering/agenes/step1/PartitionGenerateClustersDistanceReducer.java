@@ -37,13 +37,23 @@ import com.google.common.collect.Lists;
 public class PartitionGenerateClustersDistanceReducer extends
 		Reducer<IntWritable, ClusterWritable, PartitionSortKeyPair, ClusterDistanceWritable> {
 
+	/**
+	 * 向量距离度量
+	 */
 	private VectorAbstractDistanceMeasure vectorDistanceMeasure;
+
+	/**
+	 * 类别距离度量
+	 */
 	private ClusterAbstractDistanceMeasure clusterDistanceMeasure;
 
+	/**
+	 * setup
+	 */
 	@Override
 	protected void setup(Context context) throws IOException, InterruptedException {
-		// 生成距离度量策略
 		Configuration conf = context.getConfiguration();
+		// 获得距离度量策略
 		vectorDistanceMeasure = ClassUtils.instantiateAs(conf.get(Constants.VECTOR_DISTANCE_MEASURE_KEY),
 				VectorAbstractDistanceMeasure.class);
 		clusterDistanceMeasure = ClassUtils.instantiateAs(conf.get(Constants.CLUSTER_DISTANCE_MEASURE_KEY),
@@ -61,16 +71,21 @@ public class PartitionGenerateClustersDistanceReducer extends
 	@Override
 	protected void reduce(IntWritable key, Iterable<ClusterWritable> values, Context context) throws IOException,
 			InterruptedException {
+
+		// 检验类别距离度量类是否已实例化
 		Preconditions.checkNotNull(clusterDistanceMeasure);
 
-		// 将所有的ClusterWritable组成一个List
+		// 将所有的values组成一个List
 		List<ClusterWritable> clusterWritableList = Lists.newArrayList();
 		Iterator<ClusterWritable> iterator = values.iterator();
 		while (iterator.hasNext()) {
-			clusterWritableList.add(iterator.next());
+			// 需要克隆一个新实例，否则总是得到相同的实例(以下两种写法二择一)
+			clusterWritableList.add(new ClusterWritable(iterator.next().get()));
+			// clusterWritableList.add(WritableUtils.clone(iterator.next(), context.getConfiguration()));
 		}
 
-		// 将List转换成数组，方便读取
+		// 将List转换成数组，方便按矩阵读取
+		Preconditions.checkNotNull(clusterWritableList);
 		ClusterWritable[] clusterWritables = new ClusterWritable[clusterWritableList.size()];
 		clusterWritableList.toArray(clusterWritables);
 
@@ -90,9 +105,8 @@ public class PartitionGenerateClustersDistanceReducer extends
 			ClusterDistance clusterDistance = new ClusterDistance(clusterWritables[i].get(), minClusterWritable.get(),
 					minDistance);
 			ClusterDistanceWritable clusterDistanceWritable = new ClusterDistanceWritable(clusterDistance);
-			PartitionSortKeyPair partitionSortKeyPairWritable = new PartitionSortKeyPair(
-					new DoubleWritable(minDistance), key);
-			context.write(partitionSortKeyPairWritable, clusterDistanceWritable);
+			PartitionSortKeyPair partitionSortKeyPair = new PartitionSortKeyPair(new DoubleWritable(minDistance), key);
+			context.write(partitionSortKeyPair, clusterDistanceWritable);
 		}
 	}
 }

@@ -6,6 +6,15 @@ mvn package -DskipTests=true
 mvn install -DskipTests=true
 
 其他常用命令：
+export HADOOP_NAMENODE_OPTS="-Xdebug -Xrunjdwp:transport=dt_socket,address=8788,server=y,suspend=y"  
+export HADOOP_SECONDARYNAMENODE_OPTS="-Xdebug -Xrunjdwp:transport=dt_socket,address=8789,server=y,suspend=y"  
+export HADOOP_DATANODE_OPTS="-Xdebug -Xrunjdwp:transport=dt_socket,address=8790,server=y,suspend=y"  
+export HADOOP_BALANCER_OPTS="-Xdebug -Xrunjdwp:transport=dt_socket,address=8791,server=y,suspend=y"  
+export HADOOP_JOBTRACKER_OPTS="-Xdebug -Xrunjdwp:transport=dt_socket,address=8792,server=y,suspend=y"  
+export HADOOP_TASKTRACKER_OPTS="-Xdebug -Xrunjdwp:transport=dt_socket,address=8793,server=y,suspend=y"  
+
+hadoop dfsadmin -safemode leave
+hadoop daemonlog -getlevel 192.168.1.10:50075 org.apache.hadoop.mapred.TaskTracker
 put D:/Develop/github/hadoop-tdt/clustering/target/clustering-0.0.1.jar
 hadoop fs -get /clustering/output ~/clustering/output
 ############################################################################
@@ -37,9 +46,9 @@ hadoop fs -get /document-vectorizer-output ~/
 hadoop jar ~/clustering-0.0.1.jar cn.macthink.hadoop.tdt.clustering.preprocessing.GenerateInitClustersDriver
 
 执行第五步：
-hadoop jar ~/clustering-0.0.1.jar cn.macthink.hadoop.tdt.clustering.agenes.PartitionGenerateClustersDistanceDriver
+hadoop jar ~/clustering-0.0.1.jar cn.macthink.hadoop.tdt.clustering.agenes.step1.PartitionGenerateClustersDistanceDriver
 cp ~/clustering-0.0.1.jar /usr/local/hadoop/lib
-hadoop cn.macthink.hadoop.tdt.clustering.agenes.PartitionGenerateClustersDistanceOutputReader hdfs://192.168.1.10:9000/clustering/output/clusters-distance/part-r-00000
+hadoop cn.macthink.hadoop.tdt.util.SequenceFileUtils hdfs://192.168.1.10:9000/clustering/output/clusters-distance/part-r-00000
 
 执行第三步：
 bin/hadoop fs -rmr /clustering-output
