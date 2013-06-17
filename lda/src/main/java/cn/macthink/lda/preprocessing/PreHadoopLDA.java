@@ -1,4 +1,4 @@
-package cn.macthink.hadoop.tdt.batchpass;
+package cn.macthink.lda.preprocessing;
 
 import java.io.IOException;
 
@@ -18,7 +18,7 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
-import cn.macthink.hadoop.tdt.util.constant.Constants;
+import cn.macthink.lda.util.constant.Constants;
 
 public class PreHadoopLDA extends Configured implements Tool {
 
