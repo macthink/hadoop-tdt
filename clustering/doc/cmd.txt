@@ -23,7 +23,7 @@ hadoop fs -get /clustering/output ~/clustering/output
 模块执行命令
 ############################################################################
 总命令：
-hadoop jar ~/clustering-0.0.1.jar cn.macthink.hadoop.tdt.clustering.ClusteringDriver
+hadoop jar ~/clustering-0.0.1.jar cn.macthink.hadoop.tdt.clustering.agenes.AGENESDriver
 
 执行第一步：
 hadoop jar ~/clustering-0.0.1.jar cn.macthink.hadoop.tdt.vectorizer.termlist.GenerateTermListDriver
