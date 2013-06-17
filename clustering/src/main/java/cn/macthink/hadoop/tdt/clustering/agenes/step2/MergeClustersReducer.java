@@ -14,6 +14,7 @@ import java.util.Iterator;
 import java.util.Set;
 
 import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.mapreduce.Reducer;
 
@@ -21,15 +22,13 @@ import cn.macthink.hadoop.tdt.entity.Cluster;
 import cn.macthink.hadoop.tdt.entity.writable.ClusterDistanceWritable;
 import cn.macthink.hadoop.tdt.entity.writable.ClusterWritable;
 import cn.macthink.hadoop.tdt.util.constant.Constants;
-import cn.macthink.hadoop.tdt.util.partitionsort.PartitionSortKeyPair;
 
 /**
  * MergeClustersReducer
  * 
  * @author Macthink
  */
-public class MergeClustersReducer extends
-		Reducer<PartitionSortKeyPair, ClusterDistanceWritable, NullWritable, ClusterWritable> {
+public class MergeClustersReducer extends Reducer<IntWritable, ClusterDistanceWritable, NullWritable, ClusterWritable> {
 
 	/**
 	 * 类别间距离阈值
@@ -43,7 +42,7 @@ public class MergeClustersReducer extends
 	}
 
 	@Override
-	protected void reduce(PartitionSortKeyPair key, Iterable<ClusterDistanceWritable> values, Context context)
+	protected void reduce(IntWritable key, Iterable<ClusterDistanceWritable> values, Context context)
 			throws IOException, InterruptedException {
 		// 从小到大遍历，如果小于距离阈值则合并类别
 		Set<String> processedSet = new HashSet<String>();

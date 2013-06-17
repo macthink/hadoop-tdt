@@ -50,6 +50,9 @@ hadoop jar ~/clustering-0.0.1.jar cn.macthink.hadoop.tdt.clustering.agenes.step1
 cp ~/clustering-0.0.1.jar /usr/local/hadoop/lib
 hadoop cn.macthink.hadoop.tdt.util.SequenceFileUtils hdfs://192.168.1.10:9000/clustering/output/clusters-distance/part-r-00000
 
+执行第六步：
+hadoop jar ~/clustering-0.0.1.jar cn.macthink.hadoop.tdt.clustering.agenes.step2.MergeClustersDriver
+
 执行第三步：
 bin/hadoop fs -rmr /clustering-output
 bin/hadoop jar ~/clustering-0.0.1.jar cn.macthink.hadoop.tdt.clustering.CanopyClustering -i /document-vectorization-output -o /clustering-output -t1 0.0005 -t2 0.0001 -dm org.apache.mahout.common.distance.SquaredEuclideanDistanceMeasure

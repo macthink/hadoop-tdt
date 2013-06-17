@@ -90,9 +90,9 @@ public class Constants {
 	 * cn.macthink.hadoop.tdt.clustering.agenes.step2
 	 */
 	public static final String DISTANCE_THRESHOLD_KEY = "cn.macthink.hadoop.tdt.clustering.agenes.distanceThreshold";
-	public static String MERGE_CLUSTERS_INPUT_PATH = configuration.getString("merge.clusters.input.path");
-	public static String MERGE_CLUSTERS_OUTPUT_PATH = configuration.getString("merge.clusters.output.path");
 
 	public static String DISTANCE_THRESHOLD = configuration.getString(DISTANCE_THRESHOLD_KEY);
+	public static String MERGE_CLUSTERS_INPUT_PATH = configuration.getString("merge.clusters.input.path");
+	public static String MERGE_CLUSTERS_OUTPUT_PATH = configuration.getString("merge.clusters.output.path");
 
 }
