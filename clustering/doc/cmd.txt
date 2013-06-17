@@ -52,6 +52,8 @@ hadoop cn.macthink.hadoop.tdt.util.SequenceFileUtils hdfs://192.168.1.10:9000/cl
 
 执行第六步：
 hadoop jar ~/clustering-0.0.1.jar cn.macthink.hadoop.tdt.clustering.agenes.step2.MergeClustersDriver
+cp ~/clustering-0.0.1.jar /usr/local/hadoop/lib
+hadoop cn.macthink.hadoop.tdt.util.SequenceFileUtils hdfs://192.168.1.10:9000/clustering/output/merge-clusters/part-r-00000
 
 执行第三步：
 bin/hadoop fs -rmr /clustering-output

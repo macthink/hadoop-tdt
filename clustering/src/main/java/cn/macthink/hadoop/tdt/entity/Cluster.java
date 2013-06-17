@@ -126,6 +126,7 @@ public class Cluster {
 				this.vectors = Lists.newArrayList();
 			}
 			for (Vector vector : other.getVectors()) {
+				vector.setClusterId(this.id);
 				this.vectors.add(vector);
 			}
 			this.vectorNum = this.vectors.size();
