@@ -38,6 +38,11 @@ public class PartitionGenerateClustersDistanceReducer extends
 		Reducer<IntWritable, ClusterWritable, PartitionSortKeyPair, ClusterDistanceWritable> {
 
 	/**
+	 * 最后一个类别自己到自己的距离（理论上应该为零，这里特殊处理，设置一个最大的距离，防止排序时将其排在前面）
+	 */
+	private double lastClusterSelfDistance;
+
+	/**
 	 * 向量距离度量
 	 */
 	private VectorAbstractDistanceMeasure vectorDistanceMeasure;
@@ -53,16 +58,20 @@ public class PartitionGenerateClustersDistanceReducer extends
 	@Override
 	protected void setup(Context context) throws IOException, InterruptedException {
 		Configuration conf = context.getConfiguration();
+
 		// 获得距离度量策略
 		vectorDistanceMeasure = ClassUtils.instantiateAs(conf.get(Constants.VECTOR_DISTANCE_MEASURE_KEY),
 				VectorAbstractDistanceMeasure.class);
 		clusterDistanceMeasure = ClassUtils.instantiateAs(conf.get(Constants.CLUSTER_DISTANCE_MEASURE_KEY),
 				ClusterAbstractDistanceMeasure.class);
 		clusterDistanceMeasure.setVectorDistanceMeasure(vectorDistanceMeasure);
+
+		// 获得lastClusterSelfDistance
+		lastClusterSelfDistance = Double.parseDouble(conf.get(Constants.CLUSTER_MAX_DISTANCE_KEY));
 	}
 
 	/**
-	 * Reducer函数：生成类别间距离，相当于类别间的距离矩阵的上三角部分降成一维的
+	 * Reducer函数：生成类别间距离，相当于将类别间的距离矩阵的上三角部分降成一维的
 	 * 
 	 * @param key
 	 * @param values
@@ -102,11 +111,19 @@ public class PartitionGenerateClustersDistanceReducer extends
 					minDistance = distance;
 				}
 			}
+			PartitionSortKeyPair partitionSortKeyPair = new PartitionSortKeyPair(new DoubleWritable(minDistance), key);
 			ClusterDistance clusterDistance = new ClusterDistance(clusterWritables[i].get(), minClusterWritable.get(),
 					minDistance);
 			ClusterDistanceWritable clusterDistanceWritable = new ClusterDistanceWritable(clusterDistance);
-			PartitionSortKeyPair partitionSortKeyPair = new PartitionSortKeyPair(new DoubleWritable(minDistance), key);
 			context.write(partitionSortKeyPair, clusterDistanceWritable);
 		}
+
+		// 上述生成距离的方法将最后一个类别排除，需另外加入特殊处理
+		PartitionSortKeyPair partitionSortKeyPair = new PartitionSortKeyPair(
+				new DoubleWritable(lastClusterSelfDistance), key);
+		ClusterDistance clusterDistance = new ClusterDistance(clusterWritables[clusterWritables.length - 1].get(),
+				clusterWritables[clusterWritables.length - 1].get(), lastClusterSelfDistance);
+		ClusterDistanceWritable clusterDistanceWritable = new ClusterDistanceWritable(clusterDistance);
+		context.write(partitionSortKeyPair, clusterDistanceWritable);
 	}
 }

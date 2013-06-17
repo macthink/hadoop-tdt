@@ -69,18 +69,30 @@ public class Constants {
 			.getString("generate.init.clusters.output.path");
 
 	/**
-	 * cn.macthink.hadoop.tdt.clustering.agenes
+	 * cn.macthink.hadoop.tdt.clustering.agenes.step1
 	 */
 	public static final String CLUSTERING_AGENES_PROCESSOR_NUM_KEY = "cn.macthink.hadoop.tdt.clustering.agenes.processorNum";
 	public static final String CLUSTER_DISTANCE_MEASURE_KEY = "cn.macthink.hadoop.tdt.distance.cluster.ClusterDistanceMeasure";
 	public static final String VECTOR_DISTANCE_MEASURE_KEY = "cn.macthink.hadoop.tdt.distance.vector.VectorDistanceMeasure";
+	public static final String CLUSTER_MAX_DISTANCE_KEY = "cn.macthink.hadoop.tdt.clustering.agenes.maxClusterDistance";
 
 	public static int CLUSTERING_AGENES_PROCESSOR_NUM = configuration.getInt(CLUSTERING_AGENES_PROCESSOR_NUM_KEY);
 	public static String CLUSTER_DISTANCE_MEASURE = configuration.getString(CLUSTER_DISTANCE_MEASURE_KEY);
 	public static String VECTOR_DISTANCE_MEASURE = configuration.getString(VECTOR_DISTANCE_MEASURE_KEY);
+	public static String CLUSTER_MAX_DISTANCE = configuration.getString(CLUSTER_MAX_DISTANCE_KEY);
+
 	public static String PARTITION_GENERATE_CLUSTERS_DISTANCE_INPUT_PATH = configuration
 			.getString("partition.generate.clusters.distance.input.path");
 	public static String PARTITION_GENERATE_CLUSTERS_DISTANCE_OUTPUT_PATH = configuration
 			.getString("partition.generate.clusters.distance.output.path");
+
+	/**
+	 * cn.macthink.hadoop.tdt.clustering.agenes.step2
+	 */
+	public static final String DISTANCE_THRESHOLD_KEY = "cn.macthink.hadoop.tdt.clustering.agenes.distanceThreshold";
+	public static String MERGE_CLUSTERS_INPUT_PATH = configuration.getString("merge.clusters.input.path");
+	public static String MERGE_CLUSTERS_OUTPUT_PATH = configuration.getString("merge.clusters.output.path");
+
+	public static String DISTANCE_THRESHOLD = configuration.getString(DISTANCE_THRESHOLD_KEY);
 
 }
