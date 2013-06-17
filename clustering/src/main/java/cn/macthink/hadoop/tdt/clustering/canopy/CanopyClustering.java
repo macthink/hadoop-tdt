@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package cn.macthink.hadoop.tdt.clustering;
+package cn.macthink.hadoop.tdt.clustering.canopy;
 
 import java.util.List;
 import java.util.Map;
