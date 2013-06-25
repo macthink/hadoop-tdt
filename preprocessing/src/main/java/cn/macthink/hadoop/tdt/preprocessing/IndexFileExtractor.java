@@ -23,7 +23,7 @@ import org.slf4j.LoggerFactory;
 import cn.macthink.hadoop.tdt.preprocessing.cli.PreprocessingCommandLine;
 
 /**
- * IndexFileExtractor
+ * IndexFileExtractor：用于解析MY公司的索引格式文件
  * 
  * @author Macthink
  */

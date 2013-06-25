@@ -28,7 +28,8 @@ import cn.macthink.hadoop.tdt.entity.writable.ClusterDistanceWritable;
 import cn.macthink.hadoop.tdt.entity.writable.ClusterWritable;
 import cn.macthink.hadoop.tdt.util.HadoopUtils;
 import cn.macthink.hadoop.tdt.util.constant.Constants;
-import cn.macthink.hadoop.tdt.util.partitioner.KeyPartitioner;
+import cn.macthink.hadoop.tdt.util.mapper.IdentityMapper;
+import cn.macthink.hadoop.tdt.util.partitionsort.PartitionSortKeyPairPartitioner;
 
 /**
  * MergeClustersDriver
@@ -86,8 +87,8 @@ public class MergeClustersDriver extends Configured implements Tool {
 		job.setMapOutputKeyClass(IntWritable.class);
 		job.setMapOutputValueClass(ClusterDistanceWritable.class);
 
-		job.setMapperClass(MergeClustersMapper.class);
-		job.setPartitionerClass(KeyPartitioner.class);
+		job.setMapperClass(IdentityMapper.class);
+		job.setPartitionerClass(PartitionSortKeyPairPartitioner.class);
 		job.setReducerClass(MergeClustersReducer.class);
 
 		job.setOutputKeyClass(NullWritable.class);
