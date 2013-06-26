@@ -28,10 +28,10 @@ hadoop jar ~/clustering-0.0.1.jar cn.macthink.hadoop.tdt.clustering.agenes.AGENE
 执行第一步：
 hadoop jar ~/clustering-0.0.1.jar cn.macthink.hadoop.tdt.vectorizer.termlist.GenerateTermListDriver
 rm -rf ~/term-list-output
-hadoop fs -get /term-list-output ~/
+hadoop fs -get /clustering/output/term-list ~/
 
-执行第二步：
-hadoop jar ~/clustering-0.0.1.jar cn.macthink.hadoop.tdt.vectorizer.tfidf.DocumentTFIDFDriver
+执行第二步(mapred.max.split.size参数需根据数据集合设定)：
+hadoop jar ~/clustering-0.0.1.jar cn.macthink.hadoop.tdt.vectorizer.tfidf.DocumentTFIDFDriver -Dmapred.max.split.size=10000000
 *hadoop jar ~/clustering-0.0.1.jar cn.macthink.hadoop.tdt.vectorizer.old.tfidf.DocumentTFIDFDriver
 rm -rf ~/document-tfidf-output
 hadoop fs -get /document-tfidf-output ~/

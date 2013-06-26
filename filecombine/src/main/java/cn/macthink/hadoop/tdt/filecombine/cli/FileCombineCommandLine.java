@@ -9,6 +9,7 @@
 package cn.macthink.hadoop.tdt.filecombine.cli;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
@@ -49,6 +50,7 @@ public class FileCombineCommandLine {
 	public static String inputDirectoryPath = null;
 	public static String outputFilePath = null;
 	public static String inputFileCharset = null;
+	public static Boolean isRecursive = false;
 
 	// 需要处理的输入文件的后缀名列表
 	public static Set<String> inputFileExtensionSet = new HashSet<String>();
@@ -70,6 +72,7 @@ public class FileCombineCommandLine {
 		Options options = new Options();
 		// TODO 增加参数r表示遍历子文件夹
 		//@formatter:off
+		// input
 		OptionGroup optionGroup = new OptionGroup();
 		Option iOption = OptionBuilder.withLongOpt("input")
 				.hasArg(true)
@@ -79,6 +82,7 @@ public class FileCombineCommandLine {
 				.create("i");
 		optionGroup.addOption(iOption);
 		options.addOptionGroup(optionGroup);
+		// output
 		optionGroup = new OptionGroup();
 		Option oOption = OptionBuilder.withLongOpt("output")
 				.hasArg(true)
@@ -88,6 +92,7 @@ public class FileCombineCommandLine {
 				.create("o");
 		optionGroup.addOption(oOption);
 		options.addOptionGroup(optionGroup);
+		// charset
 		optionGroup = new OptionGroup();
 		Option cOption = OptionBuilder.withLongOpt("charset")
 				.hasArg(true)
@@ -96,6 +101,16 @@ public class FileCombineCommandLine {
 				.create("c");
 		optionGroup.addOption(cOption);
 		options.addOptionGroup(optionGroup);
+		// recursive
+		optionGroup = new OptionGroup();
+		Option rOption = OptionBuilder.withLongOpt("recursive")
+				.hasArg(true)
+				.withArgName("isRecursive")
+				.withDescription("Process subdirectories recursively")
+				.create("r");
+		optionGroup.addOption(rOption);
+		options.addOptionGroup(optionGroup);
+		// help
 		options.addOption("h", "help", false, "Print this usage information");
 
 		//@formatter:on
@@ -115,6 +130,9 @@ public class FileCombineCommandLine {
 			}
 			if (commandLine.hasOption("c")) {
 				FileCombineCommandLine.inputFileCharset = commandLine.getOptionValue("c", "gbk");
+			}
+			if (commandLine.hasOption("r")) {
+				FileCombineCommandLine.isRecursive = Boolean.parseBoolean(commandLine.getOptionValue("r", "false"));
 			}
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
@@ -152,16 +170,23 @@ public class FileCombineCommandLine {
 		/**
 		 * 处理文件夹中的文件
 		 */
-		File[] inputFiles = inputDirectory.listFiles(new ExtensionFileFilter(
-				FileCombineCommandLine.inputFileExtensionSet));
-		for (File inputFile : inputFiles) {
-			FileCombine.combine(inputFile, outputFile);
+		if (!FileCombineCommandLine.isRecursive) {
+			File[] inputFiles = inputDirectory.listFiles(new ExtensionFileFilter(
+					FileCombineCommandLine.inputFileExtensionSet));
+			for (File inputFile : inputFiles) {
+				if (inputFile.isFile()) {
+					FileCombine.combine(inputFile, outputFile);
+				}
+			}
+		} else {
+			combineExistFileRecursive(inputDirectory, outputFile);
 		}
 
 		/**
 		 * 启动监控进程，监控输入目录的文件变化，调用处理器
 		 */
 		logger.info("Starting file monitor.");
+		// TODO:递归不能动态监听文件夹变化
 		FileAlterationObserver observer = new FileAlterationObserver(inputDirectory, new ExtensionFileFilter(
 				FileCombineCommandLine.inputFileExtensionSet));
 		FileCreateListenerAdaptor listener = new FileCreateListenerAdaptor(outputFile);
@@ -209,6 +234,35 @@ public class FileCombineCommandLine {
 			System.exit(1);
 		}
 		return inputDirectory;
+	}
+
+	/**
+	 * 递归处理文件夹中的文件
+	 * 
+	 * @return
+	 */
+	public static void combineExistFileRecursive(File inputDirectory, File outputFile) {
+		// 遍历该目录下的子目录
+		File[] subDirectories = inputDirectory.listFiles(new FileFilter() {
+			@Override
+			public boolean accept(File pathname) {
+				if (pathname.isDirectory()) {
+					return true;
+				} else {
+					return false;
+				}
+			}
+		});
+		for (File directory : subDirectories) {
+			combineExistFileRecursive(directory, outputFile);
+		}
+
+		// 遍历该目录下的文件
+		File[] subFiles = inputDirectory
+				.listFiles(new ExtensionFileFilter(FileCombineCommandLine.inputFileExtensionSet));
+		for (File file : subFiles) {
+			FileCombine.combine(file, outputFile);
+		}
 	}
 
 	/**

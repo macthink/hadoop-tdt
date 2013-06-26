@@ -96,9 +96,15 @@ public class DocumentTFIDFDriver extends Configured implements Tool {
 		// 配置Job
 		Job job = new Job(conf, DocumentTFIDFDriver.class.getSimpleName());
 		job.setJarByClass(DocumentTFIDFDriver.class);
+
+		// 控制Mapper和Reducer的个数
+		KeyValueTextInputFormat.setMaxInputSplitSize(job, 100000);
+		job.setNumReduceTasks(6);
+
 		job.setInputFormatClass(KeyValueTextInputFormat.class);
 		job.setMapperClass(DocumentTFIDFMapper.class);
 		job.setReducerClass(DocumentTFIDFReducer.class);
+
 		job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(Text.class);
 

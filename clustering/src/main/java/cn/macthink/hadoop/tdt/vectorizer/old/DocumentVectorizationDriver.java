@@ -76,11 +76,10 @@ public class DocumentVectorizationDriver extends Configured implements Tool {
 		// 配置Job
 		Job job = new Job(conf, DocumentVectorizationDriver.class.getSimpleName());
 		job.setJarByClass(DocumentVectorizationDriver.class);
+
 		job.setInputFormatClass(KeyValueTextInputFormat.class);
-
-		job.setMapOutputKeyClass(CompoundKeyValuePair.class);
-
 		job.setMapperClass(DocumentVectorizationMapper.class);
+		job.setMapOutputKeyClass(CompoundKeyValuePair.class);
 		job.setReducerClass(DocumentVectorizationReducer.class);
 
 		job.setPartitionerClass(CompoundKeyValuePairPartitioner.class);

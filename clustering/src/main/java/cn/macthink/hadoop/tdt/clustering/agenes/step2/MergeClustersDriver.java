@@ -14,7 +14,6 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
@@ -29,6 +28,7 @@ import cn.macthink.hadoop.tdt.entity.writable.ClusterWritable;
 import cn.macthink.hadoop.tdt.util.HadoopUtils;
 import cn.macthink.hadoop.tdt.util.constant.Constants;
 import cn.macthink.hadoop.tdt.util.mapper.IdentityMapper;
+import cn.macthink.hadoop.tdt.util.partitionsort.PartitionSortKeyPair;
 import cn.macthink.hadoop.tdt.util.partitionsort.PartitionSortKeyPairPartitioner;
 
 /**
@@ -84,7 +84,7 @@ public class MergeClustersDriver extends Configured implements Tool {
 		job.setInputFormatClass(SequenceFileInputFormat.class);
 		job.setOutputFormatClass(SequenceFileOutputFormat.class);
 
-		job.setMapOutputKeyClass(IntWritable.class);
+		job.setMapOutputKeyClass(PartitionSortKeyPair.class);
 		job.setMapOutputValueClass(ClusterDistanceWritable.class);
 
 		job.setMapperClass(IdentityMapper.class);
